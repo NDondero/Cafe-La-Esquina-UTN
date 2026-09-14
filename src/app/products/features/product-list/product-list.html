@@ -1,0 +1,15 @@
+@let products = this.products();
+
+<p>product-list works!</p>
+@if (isLoaing()) {
+  Cargando productos...
+} @else {
+  @for (product of products; track product.id) {
+    <!-- <p>
+      {{ product.name }} <button (click)="deleteProduct(product.id)">Borrar</button>
+    </p> -->
+    <app-product-card></app-product-card>
+  } @empty {
+    No hay productos cargados...
+  }
+}

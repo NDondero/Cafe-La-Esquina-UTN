@@ -1,0 +1,13 @@
+{
+  "products": [
+    {
+      "id": "b8a9",
+      "name": "Pan",
+      "price": 1500,
+      "category": "",
+      "description": "",
+      "isFeatured": false,
+      "isOnSale": false
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+<p>product-form works!</p>
+<form [formGroup]="productForm" autocomplete="off" (ngSubmit)="subtmitForm()">
+  <div class="form-control">
+    <label for="name" >Nombre: </label>
+    <input type="text" id="name" formControlName="name">
+    @if (name.touched) {
+      @if (name.hasError('required')) {
+        <span>Requerido</span>
+      } @else if(name.hasError('minlength')) {
+        <span>Nombre muy corto</span>
+      }
+    }
+  </div>
+  <div class="form-control">
+    <label for="price">Precio $</label>
+    <input type="number" id="price" formControlName="price" min="1000">
+    @if (productForm.controls.price.dirty) {
+      @if (productForm.controls.price.hasError('required')) {
+        <span>Requerido.</span>
+      }
+      @else if(productForm.controls.price.hasError('min')) {
+        <span>El precio mínimo es $1000</span>
+      }
+    }
+  </div>
+
+  <div class="acctions">
+    <button type="submit">Enviar</button>
+    <button type="reset">Borrar</button>
+  </div>
+</form>
