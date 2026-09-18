@@ -24,8 +24,43 @@
     }
   </div>
 
+  <div class="form-control">
+    <label for="category">Categoría</label>
+    <select id="category" formControlName="category">
+      <option value="" selected disabled>seleccione una categoría</option>
+      @for (category of categories; track $index) {
+        <option [value]="category">{{ category }}</option>
+      }
+    </select>
+    @if (category.touched) {
+      @if (category.hasError('required')) {
+        <span>Requerido</span>
+      }
+    }
+  </div>
+
+  <div class="form-control">
+    <label for="description">Descripción</label>
+    <textarea id="description" formControlName="description" rows="4"></textarea>
+    @if (description.touched) {
+      @if (description.hasError('required')) {
+        <span>Requerido</span>
+      }
+    }
+  </div>
+
+  <div class="form-control">
+    <label for="isFeatured">Producto destacado</label>
+    <input type="checkbox" id="isFeatured" formControlName="isFeatured">
+  </div>
+  <div class="form-control">
+    <label for="isOnSale">Producto en oferta</label>
+    <input type="checkbox" id="isOnSale" formControlName="isOnSale">
+  </div>
+  
+
   <div class="acctions">
-    <button type="submit">Enviar</button>
+    <button type="submit" [disabled]="productForm.invalid">Enviar</button>
     <button type="reset">Borrar</button>
   </div>
 </form>

@@ -25,10 +25,24 @@ export default class ProductForm {
   protected readonly productForm = this.formBuilder.nonNullable.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
     price: [0, [Validators.required, Validators.min(1000)]],
+    category: ['', Validators.required],
+    description: ['', Validators.required],
+    isFeatured: [false],
+    isOnSale: [false],
   });
+
+  protected readonly categories = ['Panadería', 'Pastelería', 'Facturas', 'Bebidas'];
 
   get name() {
     return this.productForm.controls.name;
+  }
+
+  get category() {
+    return this.productForm.controls.category;
+  }
+
+  get description() {
+    return this.productForm.controls.description;
   }
 
   subtmitForm() {
@@ -40,14 +54,9 @@ export default class ProductForm {
     const product = this.productForm.getRawValue();
     console.log(product);
 
-    this.client.addProduct({
-      ...product,
-      category: '',
-      description: '',
-      isFeatured: false,
-      isOnSale: false,
-    }).subscribe(() => {
+    this.client.addProduct(product).subscribe(() => {
       alert('Se Agrego el producto con éxito!');
+      this.productForm.reset();
     });
   }
 }

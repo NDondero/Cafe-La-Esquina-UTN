@@ -8,6 +8,70 @@
       "description": "",
       "isFeatured": false,
       "isOnSale": false
+    },
+    {
+      "name": "Café doble",
+      "price": 4500,
+      "category": "",
+      "description": "",
+      "isFeatured": false,
+      "isOnSale": false,
+      "id": "mr7re1yEW8A"
+    },
+    {
+      "name": "Café doble",
+      "price": 4500,
+      "category": "",
+      "description": "",
+      "isFeatured": false,
+      "isOnSale": false,
+      "id": "Ajpt2Y3fWeA"
+    },
+    {
+      "name": "Café doble",
+      "price": 4500,
+      "category": "",
+      "description": "",
+      "isFeatured": false,
+      "isOnSale": false,
+      "id": "MhsnGfi5RhE"
+    },
+    {
+      "name": "Café doble",
+      "price": 4500,
+      "category": "",
+      "description": "",
+      "isFeatured": false,
+      "isOnSale": false,
+      "id": "FTO_Sh1tHrw"
+    },
+    {
+      "name": "Café doble",
+      "price": 4500,
+      "category": "",
+      "description": "",
+      "isFeatured": false,
+      "isOnSale": false,
+      "id": "6N-POsXkj4s"
+    },
+    {
+      "name": "Café doble",
+      "price": 4500,
+      "category": "",
+      "description": "",
+      "isFeatured": false,
+      "isOnSale": false,
+      "id": "eowXGqCbX_g"
+    },
+    {
+      "name": "Croissant de J&Q",
+      "price": 5000,
+      "category": "Pastelería",
+      "description": "Riquisimo!",
+      "isFeatured": false,
+      "isOnSale": true,
+      "id": "M-V97Nc9m4U"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
