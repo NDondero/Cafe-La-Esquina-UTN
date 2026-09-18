@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input, output } from '@angular/core';
+import { Product } from '../../data-access/product';
 
 @Component({
   imports: [],
@@ -6,4 +7,8 @@ import { Component } from '@angular/core';
   styleUrl: './product-card.css',
   templateUrl: './product-card.html',
 })
-export class ProductCard {}
+export class ProductCard {
+  public readonly product = input.required<Product>();
+  public readonly navigationSelected = output<string | number>();
+  public readonly productDeleted = output<string | number>();
+}

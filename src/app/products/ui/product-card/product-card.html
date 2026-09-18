@@ -1,1 +1,12 @@
-<p>product-card works!</p>
+@let product = this.product();
+
+<article>
+  <p>{{ product.category }}</p>
+  <h2>{{ product.name }}</h2>
+  <p>{{ product.description }}</p>
+  <p>$ {{ product.price }}</p>
+  <div class="buttons">
+    <button (click)="navigationSelected.emit(product.id)">Ver detalles</button>
+    <button (click)="productDeleted.emit(product.id)">Borrar</button>
+  </div>
+</article>
