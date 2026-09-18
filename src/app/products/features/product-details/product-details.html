@@ -1,1 +1,24 @@
-<p>product-details works!</p>
+@let product = this.product();
+
+@if (product) {
+  <article>
+    <p>{{ product.category }}</p>
+    <h2>{{ product.name }}</h2>
+    <p>{{ product.description }}</p>
+    <p>$ {{ product.price }}</p>
+    @if (product.isFeatured) {
+      <p>Producto Destacado!</p>
+    }
+    @if (product.isOnSale) {
+      <p>Producto en oferta!!</p>
+    }
+    <button (click)="isEditing.update((v) => !v)">{{ isEditing() ? 'Cancelar' : 'Editar' }}</button>
+    <button (click)="onProductDeleted()" [disabled]="isEditing()">Borrar</button>
+  </article>
+  @if (isEditing()) {
+    <app-product-form
+      [editingProduct]="product"
+      (editted)="onEditedProduct($event)"
+    ></app-product-form>
+  }
+}

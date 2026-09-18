@@ -1,67 +1,40 @@
 {
   "products": [
     {
-      "id": "b8a9",
-      "name": "Pan",
-      "price": 1500,
-      "category": "",
-      "description": "",
-      "isFeatured": false,
-      "isOnSale": false
-    },
-    {
-      "name": "Café doble",
-      "price": 4500,
-      "category": "",
-      "description": "",
+      "name": "Pan de molde",
+      "price": 3200,
+      "category": "Panadería",
+      "description": "Pan casero de elaboración diaria, ideal para desayunos y meriendas.",
       "isFeatured": false,
       "isOnSale": false,
-      "id": "Ajpt2Y3fWeA"
+      "id": "edTz08igHOg"
     },
     {
-      "name": "Café doble",
-      "price": 4500,
-      "category": "",
-      "description": "",
+      "name": "Medialunas",
+      "price": 1800,
+      "category": "Facturas",
+      "description": "Medialunas dulces recién horneadas para acompañar el café.",
       "isFeatured": false,
       "isOnSale": false,
-      "id": "MhsnGfi5RhE"
+      "id": "qVhq6j-v31w"
     },
     {
-      "name": "Café doble",
-      "price": 4500,
-      "category": "",
-      "description": "",
-      "isFeatured": false,
-      "isOnSale": false,
-      "id": "FTO_Sh1tHrw"
-    },
-    {
-      "name": "Café doble",
-      "price": 4500,
-      "category": "",
-      "description": "",
-      "isFeatured": false,
-      "isOnSale": false,
-      "id": "6N-POsXkj4s"
-    },
-    {
-      "name": "Café doble",
-      "price": 4500,
-      "category": "",
-      "description": "",
-      "isFeatured": false,
-      "isOnSale": false,
-      "id": "eowXGqCbX_g"
-    },
-    {
-      "name": "Croissant de J&Q",
-      "price": 5000,
+      "name": "Budín casero",
+      "price": 2500,
       "category": "Pastelería",
-      "description": "Riquisimo!",
+      "description": "Budín artesanal disponible en diferentes sabores.",
       "isFeatured": false,
-      "isOnSale": true,
-      "id": "M-V97Nc9m4U"
+      "isOnSale": false,
+      "id": "2exZOdhUJZ0"
+    },
+    {
+      "name": "Café artesanal",
+      "price": 2200,
+      "category": "Bebidas",
+      "description": "Café elaborado con granos seleccionados para acompañar nuestros productos",
+      "isFeatured": false,
+      "isOnSale": false,
+      "id": "FQET2l_aoW8"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject, input, OnInit, output } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ProductClient } from '../../data-access/product-client';
+import { Product } from '../../data-access/product';
 
 @Component({
   imports: [ReactiveFormsModule],
@@ -14,13 +15,21 @@ import { ProductClient } from '../../data-access/product-client';
   styleUrl: './product-form.css',
   templateUrl: './product-form.html',
 })
-export default class ProductForm {
+export default class ProductForm implements OnInit {
   private readonly formBuilder = inject(FormBuilder);
   private readonly client = inject(ProductClient);
-  /* protected readonly productForm = new FormGroup({
-    name: new FormControl('', Validators.required),
-    // ...
-  }) */
+
+  public readonly editingProduct = input<Product>();
+  protected readonly isEditing = computed(() => this.editingProduct() !== undefined);
+  public readonly editted = output<Product>();
+
+  ngOnInit(): void {
+    const editingProduct = this.editingProduct();
+
+    if (this.isEditing() && editingProduct) {
+      this.productForm.patchValue(editingProduct);
+    }
+  }
 
   protected readonly productForm = this.formBuilder.nonNullable.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
@@ -51,12 +60,22 @@ export default class ProductForm {
       console.log('Formulario inválido');
       return;
     }
-    const product = this.productForm.getRawValue();
-    console.log(product);
 
-    this.client.addProduct(product).subscribe(() => {
-      alert('Se Agrego el producto con éxito!');
-      this.productForm.reset();
-    });
+    if (confirm('Desea confirmar los datos?')) {
+      const product = this.productForm.getRawValue();
+      const editingProduct = this.editingProduct();
+      if (this.isEditing() && editingProduct) {
+        const { id } = editingProduct;
+        this.client.editProduct(product, id).subscribe((product) => {
+          alert('Producto modificado con éxito!');
+          this.editted.emit(product);
+        });
+      } else {
+        this.client.addProduct(product).subscribe(() => {
+          alert('Se Agrego el producto con éxito!');
+          this.productForm.reset();
+        });
+      }
+    }
   }
 }

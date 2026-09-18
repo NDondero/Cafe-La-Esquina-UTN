@@ -1,3 +1,5 @@
+<h2>{{ isEditing() ? 'Editando Producto' : 'Agregando Producto' }}</h2>
+
 <form [formGroup]="productForm" autocomplete="off" (ngSubmit)="subtmitForm()">
   <div class="form-control">
     <label for="name" >Nombre: </label>
