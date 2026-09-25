@@ -54,6 +54,13 @@ export default class ProductForm implements OnInit {
     return this.productForm.controls.description;
   }
 
+  readonly hasUnsavedChanges = computed(() => {
+    const state = this.productForm.getRawValue();
+    const unsavedChanges =
+      state.name !== '' || state.price !== 0 || state.category !== '' || state.description !== '';
+    return (this.productForm.dirty || this.productForm.touched) && unsavedChanges;
+  });
+
   subtmitForm() {
     console.log('enviando');
     if (this.productForm.invalid) {
