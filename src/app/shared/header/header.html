@@ -9,4 +9,8 @@
   </a>
   <a routerLink="/productos/agregar" routerLinkActive="active-link">Agregar productos</a>
 </nav>
-<button>Iniciar sesión</button>
+@if (auth.isAuthenticated()) {
+  <button (click)="logout()">Cerrar Sesión</button>
+} @else {
+  <button routerLink="/auth/login">Iniciar sesión</button>
+}
