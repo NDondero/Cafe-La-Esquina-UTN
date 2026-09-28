@@ -6,7 +6,7 @@
       "category": "Panadería",
       "description": "Pan casero de elaboración diaria, ideal para desayunos y meriendas.",
       "isFeatured": false,
-      "isOnSale": false,
+      "isOnSale": true,
       "id": "edTz08igHOg"
     },
     {
@@ -23,7 +23,7 @@
       "price": 2500,
       "category": "Pastelería",
       "description": "Budín artesanal disponible en diferentes sabores.",
-      "isFeatured": false,
+      "isFeatured": true,
       "isOnSale": false,
       "id": "2exZOdhUJZ0"
     },

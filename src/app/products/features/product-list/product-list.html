@@ -1,15 +1,37 @@
 @let products = this.products();
 
-@if (isLoaing()) {
-  <p>Cargando productos...</p>
-} @else {
-  @for (product of products; track product.id) {
-    <app-product-card
-      [product]="product"
-      (productDeleted)="deleteProduct($event)"
-      (navigationSelected)="navigateToDetails($event)"
-    ></app-product-card>
-  } @empty {
-    <p>No hay productos cargados...</p>
+<aside>
+  <h3>Menú</h3>
+  <button (click)="cleanFilters()">Productos</button>
+  <button (click)="filterBySaleOrFeatured.set('isFeatured')">Destacados</button>
+  <button (click)="filterBySaleOrFeatured.set('isOnSale')">Ofertas</button>
+  <label for="category">Filtrar por categoría</label>
+  <select id="category" [(ngModel)]="filterByCategory">
+    <option value="">Ninguna categoría</option>
+    @for (category of categories; track $index) {
+      <option [value]="category">{{ category }}</option>
+    }
+  </select>
+  <label for="name">Filtrar por producto</label>
+  <input type="text" id="name" [(ngModel)]="filterByName">
+</aside>
+
+<section>
+  <h2>Nuestros Productos</h2>
+  <p>Productos artesanales elaborados todos los días.</p>
+  @if (isLoaing()) {
+    <p>Cargando productos...</p>
+  } @else {
+    <div class="card-container">
+      @for (product of products; track product.id) {
+        <app-product-card
+        [product]="product"
+        (productDeleted)="deleteProduct($event)"
+        (navigationSelected)="navigateToDetails($event)"
+      ></app-product-card>
+    } @empty {
+      <p>No hay productos cargados...</p>
+    }
+  </div>
   }
-}
+</section>

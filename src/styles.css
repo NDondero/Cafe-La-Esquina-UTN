@@ -14,7 +14,7 @@
   --bg-primary: var(--base-bg);
 
   /* Superficie secundaria: variación sutil para tarjetas, paneles o contenedores */
-  --bg-secondary: oklch(from var(--base-bg) calc(l - 0.03) c h);
+  --bg-secondary: oklch(from var(--base-bg) calc(l - 0.1) c h);
 
   /* Color de bordes y divisores con contraste adecuado para elementos gráficos */
   --border-color: oklch(from var(--base-bg) calc(l - 0.12) c h);
