@@ -1,0 +1,23 @@
+:host {
+  min-height: 100vh;
+  display: grid;
+  grid-template-areas:
+    'header'
+    'main'
+    'footer';
+  grid-template-rows: auto 1fr auto;
+}
+
+main {
+  grid-area: main;
+}
+
+footer {
+  grid-area: footer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--text-primary);
+  color: var(--text-on-accent);
+  height: clamp(3.5rem, 8vh, 4rem);
+}

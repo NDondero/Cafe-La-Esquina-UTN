@@ -1,7 +1,13 @@
 :host {
+  grid-area: header;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  background-color: var(--text-primary);
+  color: var(--text-on-accent);
+  padding: 0.5rem 1rem;
+  height: clamp(3.5rem, 8vh, 4rem);
 }
 
 a {
@@ -13,5 +19,26 @@ a {
 }
 
 .active-link {
-  color: purple;
+  color: var(--color-accent);
+}
+
+button {
+  background-color: var(--color-accent);
+  color: var(--text-on-accent);
+  border: none;
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+
+  &:hover {
+    background-color: var(--color-accent-hover);
+  }
+
+  &:active {
+    background-color: var(--color-accent-active);
+    transform: scale(0.97);
+  }
 }

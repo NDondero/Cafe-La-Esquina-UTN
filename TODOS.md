@@ -1,0 +1,7 @@
+- Dar estilos a los componentes actuales
+- Implementar filtros y ordenamientos del listado
+- Refactorizar ventanas de confirmación/alerta por modales
+- Refactorizar rutas para centralizar las cadenas literales
+- Refactorizar formularios para usar SignalForms
+- Refactorizar el acceso a datos para incluir almacén de estado
+- Implementar interceptores http
