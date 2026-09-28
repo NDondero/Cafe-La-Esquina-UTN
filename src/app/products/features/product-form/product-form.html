@@ -2,25 +2,25 @@
 
 <form [formGroup]="productForm" autocomplete="off" (ngSubmit)="subtmitForm()">
   <div class="form-control">
-    <label for="name" >Nombre: </label>
-    <input type="text" id="name" formControlName="name">
+    <label for="name" >Nombre</label>
+    <input type="text" id="name" formControlName="name" placeholder="Pan">
     @if (name.touched) {
       @if (name.hasError('required')) {
-        <span>Requerido</span>
+        <span class="errors">Requerido</span>
       } @else if(name.hasError('minlength')) {
-        <span>Nombre muy corto</span>
+        <span class="errors">Nombre muy corto</span>
       }
     }
   </div>
   <div class="form-control">
-    <label for="price">Precio $</label>
-    <input type="number" id="price" formControlName="price" min="1000">
+    <label for="price">Precio</label>
+    <input type="number" id="price" formControlName="price" min="1000" placeholder="1500">
     @if (productForm.controls.price.dirty) {
       @if (productForm.controls.price.hasError('required')) {
-        <span>Requerido.</span>
+        <span class="errors">Requerido</span>
       }
       @else if(productForm.controls.price.hasError('min')) {
-        <span>El precio mínimo es $1000</span>
+        <span class="errors">El precio mínimo es $1000</span>
       }
     }
   </div>
@@ -35,32 +35,32 @@
     </select>
     @if (category.touched) {
       @if (category.hasError('required')) {
-        <span>Requerido</span>
+        <span class="errors">Requerido</span>
       }
     }
   </div>
 
   <div class="form-control">
     <label for="description">Descripción</label>
-    <textarea id="description" formControlName="description" rows="4"></textarea>
+    <textarea id="description" formControlName="description" rows="4" placeholder="Pan de masa madre"></textarea>
     @if (description.touched) {
       @if (description.hasError('required')) {
-        <span>Requerido</span>
+        <span class="errors">Requerido</span>
       }
     }
   </div>
 
-  <div class="form-control">
+  <div class="form-control checkbox">
     <label for="isFeatured">Producto destacado</label>
     <input type="checkbox" id="isFeatured" formControlName="isFeatured">
   </div>
-  <div class="form-control">
+  <div class="form-control checkbox">
     <label for="isOnSale">Producto en oferta</label>
     <input type="checkbox" id="isOnSale" formControlName="isOnSale">
   </div>
   
 
-  <div class="acctions">
+  <div class="actions">
     <button type="submit" [disabled]="productForm.invalid">Enviar</button>
     <button type="reset">Borrar</button>
   </div>

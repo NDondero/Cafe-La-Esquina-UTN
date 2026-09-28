@@ -21,24 +21,3 @@ a {
 .active-link {
   color: var(--color-accent);
 }
-
-button {
-  background-color: var(--color-accent);
-  color: var(--text-on-accent);
-  border: none;
-  border-radius: 6px;
-  padding: 0.25rem 0.5rem;
-  cursor: pointer;
-  transition:
-    background-color 0.3s ease,
-    transform 0.3s ease;
-
-  &:hover {
-    background-color: var(--color-accent-hover);
-  }
-
-  &:active {
-    background-color: var(--color-accent-active);
-    transform: scale(0.97);
-  }
-}

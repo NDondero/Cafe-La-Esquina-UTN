@@ -1,0 +1,61 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 2rem;
+  font-size: 1.2rem;
+}
+
+h2 {
+  margin-bottom: 2rem;
+}
+
+form {
+  width: min(100% - 2rem, 480px);
+}
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+
+  input,
+  select,
+  textarea {
+    font-family: inherit;
+    font-size: 0.9rem;
+    resize: none;
+  }
+
+  &.checkbox {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-right: 0.125rem;
+
+    input {
+      transform: scale(1.5);
+    }
+  }
+
+  position: relative;
+  .errors {
+    position: absolute;
+    user-select: none;
+    top: 0;
+    right: 0;
+    color: #962121;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+  gap: 2rem;
+  
+  button {
+    flex: 1;
+  }
+}
