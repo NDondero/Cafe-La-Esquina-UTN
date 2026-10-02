@@ -1,5 +1,29 @@
-:host {
-  /* flex: 1 0 240px; */
-  width: 240px;
-  background-color: var(--bg-secondary);
+article {
+  background-color: #fff;
+  padding: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: 0 0 0.75rem 0.75rem #0002;
+
+  .buttons {
+    display: flex;
+    padding-inline: 1rem;
+    gap: 1rem;
+    justify-content: space-evenly;
+
+    button {
+      flex: 1;
+    }
+  }
+}
+
+.description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
 }

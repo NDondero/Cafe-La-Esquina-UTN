@@ -3,10 +3,10 @@ import { ProductClient } from '../../data-access/product-client';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ProductCard } from '../../ui/product-card/product-card';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { Product } from '../../data-access/product';
 
 @Component({
-  imports: [ProductCard, FormsModule],
+  imports: [ProductCard],
   selector: 'app-product-list',
   styleUrl: './product-list.css',
   templateUrl: './product-list.html',
@@ -21,35 +21,40 @@ export default class ProductList {
     if (!products) return [];
     const SaleOrFeatureFilter = this.filterBySaleOrFeatured();
     if (SaleOrFeatureFilter) {
-      if (SaleOrFeatureFilter === 'isFeatured') {
-        products = products.filter((p) => p.isFeatured);
-      } else {
-        products = products.filter((p) => p.isOnSale);
-      }
+      products =
+        SaleOrFeatureFilter === 'isFeatured'
+          ? products.filter((p) => p.isFeatured)
+          : products.filter((p) => p.isOnSale);
     }
     const categoryFilter = this.filterByCategory();
     if (categoryFilter) {
       products = products.filter((p) => p.category === categoryFilter);
     }
-    const nameFilter = this.filterByName();
+    const nameFilter = this.filterByName().trim().toLocaleLowerCase();
     if (nameFilter) {
       products = products.filter((p) => p.name.toLocaleLowerCase().includes(nameFilter));
     }
 
-    return [...products.sort((a, b) => a.name.localeCompare(b.name))];
+    return this.toSortedByCategoryAndName(products);
   });
   protected readonly isLoaing = computed(() => this.productsSource() === undefined);
 
   protected readonly categories = ['Panadería', 'Pastelería', 'Facturas', 'Bebidas'];
 
-  protected readonly filterBySaleOrFeatured = signal<'isOnSale' | 'isFeatured' | undefined>(
-    undefined,
-  );
+  protected readonly filterBySaleOrFeatured = signal<'isOnSale' | 'isFeatured' | ''>('');
   protected readonly filterByName = signal<string>('');
   protected readonly filterByCategory = signal<string>('');
 
+  protected readonly hasFilters = computed(() => {
+    return (
+      this.filterBySaleOrFeatured() !== '' ||
+      this.filterByName() !== '' ||
+      this.filterByCategory() !== ''
+    );
+  });
+
   cleanFilters() {
-    this.filterBySaleOrFeatured.set(undefined);
+    this.filterBySaleOrFeatured.set('');
     this.filterByName.set('');
     this.filterByCategory.set('');
   }
@@ -65,5 +70,12 @@ export default class ProductList {
 
   navigateToDetails(id: string | number) {
     this.router.navigate(['productos', id]);
+  }
+
+  private toSortedByCategoryAndName(products: Product[]) {
+    return [...products].sort((a, b) => {
+      const categoryComparator = a.category.localeCompare(b.category);
+      return categoryComparator !== 0 ? categoryComparator : a.name.localeCompare(b.name);
+    });
   }
 }

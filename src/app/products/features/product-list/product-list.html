@@ -2,18 +2,45 @@
 
 <aside>
   <h3>Menú</h3>
-  <button (click)="cleanFilters()">Productos</button>
-  <button (click)="filterBySaleOrFeatured.set('isFeatured')">Destacados</button>
-  <button (click)="filterBySaleOrFeatured.set('isOnSale')">Ofertas</button>
+  <button [class.active-filter]="!hasFilters()" (click)="cleanFilters()">
+    @if (hasFilters()) {
+      Limpiar filtros
+    } @else {
+      Todos los productos
+    }
+  </button>
+  <button
+    [class.active-filter]="filterBySaleOrFeatured() === 'isFeatured'"
+    (click)="filterBySaleOrFeatured.set('isFeatured')"
+  >
+    Destacados
+  </button>
+  <button
+    [class.active-filter]="filterBySaleOrFeatured() === 'isOnSale'"
+    (click)="filterBySaleOrFeatured.set('isOnSale')"
+  >
+    Ofertas
+  </button>
   <label for="category">Filtrar por categoría</label>
-  <select id="category" [(ngModel)]="filterByCategory">
+  <select
+    id="category"
+    #categorySelect
+    [value]="filterByCategory()"
+    (change)="filterByCategory.set(categorySelect.value)"
+  >
     <option value="">Ninguna categoría</option>
     @for (category of categories; track $index) {
       <option [value]="category">{{ category }}</option>
     }
   </select>
   <label for="name">Filtrar por producto</label>
-  <input type="text" id="name" [(ngModel)]="filterByName">
+  <input
+    type="text"
+    id="name"
+    #nameInput
+    [value]="filterByName()"
+    (input)="filterByName.set(nameInput.value)"
+  />
 </aside>
 
 <section>
@@ -22,16 +49,18 @@
   @if (isLoaing()) {
     <p>Cargando productos...</p>
   } @else {
-    <div class="card-container">
+    <ul class="card-container">
       @for (product of products; track product.id) {
-        <app-product-card
-        [product]="product"
-        (productDeleted)="deleteProduct($event)"
-        (navigationSelected)="navigateToDetails($event)"
-      ></app-product-card>
-    } @empty {
-      <p>No hay productos cargados...</p>
-    }
-  </div>
+        <li>
+          <app-product-card
+            [product]="product"
+            (productDeleted)="deleteProduct($event)"
+            (navigationSelected)="navigateToDetails($event)"
+          ></app-product-card>
+        </li>
+      } @empty {
+        <li>No hay productos cargados...</li>
+      }
+    </ul>
   }
 </section>
