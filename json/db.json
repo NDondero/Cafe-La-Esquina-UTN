@@ -35,6 +35,15 @@
       "isFeatured": false,
       "isOnSale": false,
       "id": "FQET2l_aoW8"
+    },
+    {
+      "name": "Lorem",
+      "price": 1000,
+      "category": "Panadería",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, alias! Corrupti, consectetur voluptatibus. Sequi sed tempore dignissimos. Amet expedita saepe at necessitatibus iure? Distinctio minima laboriosam natus architecto rerum deserunt!",
+      "isFeatured": true,
+      "isOnSale": true,
+      "id": "GBzEkmT9eWY"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

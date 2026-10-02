@@ -2,18 +2,20 @@
 
 @if (product) {
   <article>
-    <p>{{ product.category }}</p>
+    <p [style.color]="'var(--color-accent)'">{{ product.category }}</p>
     <h2>{{ product.name }}</h2>
-    <p>{{ product.description }}</p>
-    <p>$ {{ product.price }}</p>
+    <p class="description">{{ product.description }}</p>
+    <p [style.color]="'var(--color-accent)'">$ {{ product.price }}</p>
     @if (product.isFeatured) {
-      <p>Producto Destacado!</p>
+      <p>Producto destacado!</p>
     }
     @if (product.isOnSale) {
       <p>Producto en oferta!!</p>
     }
-    <button (click)="isEditing.update((v) => !v)">{{ isEditing() ? 'Cancelar' : 'Editar' }}</button>
-    <button (click)="onProductDeleted()" [disabled]="isEditing()">Borrar</button>
+    <div class="actions">
+      <button (click)="isEditing.update((v) => !v)">{{ isEditing() ? 'Cancelar' : 'Editar' }}</button>
+      <button (click)="onProductDeleted()" [disabled]="isEditing()">Borrar</button>
+    </div>
   </article>
   @if (isEditing()) {
     <app-product-form

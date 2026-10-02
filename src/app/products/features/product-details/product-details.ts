@@ -1,4 +1,4 @@
-import { Component, inject, linkedSignal, signal } from '@angular/core';
+import { Component, inject, linkedSignal, OnInit, signal } from '@angular/core';
 import ProductForm from '../product-form/product-form';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductClient } from '../../data-access/product-client';
@@ -11,16 +11,29 @@ import { Product } from '../../data-access/product';
   styleUrl: './product-details.css',
   templateUrl: './product-details.html',
 })
-export default class ProductDetails {
+export default class ProductDetails implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly client = inject(ProductClient);
 
   private readonly id = this.route.snapshot.paramMap.get('id')!;
 
-  protected readonly productSource = toSignal(this.client.getProductById(this.id));
-  protected readonly product = linkedSignal(() => this.productSource());
+  // protected readonly productSource = toSignal(this.client.getProductById(this.id));
+  // protected readonly product = linkedSignal(() => this.productSource());
+  protected readonly product = signal<Product | undefined>(undefined);
   protected readonly isEditing = signal(false);
+
+  ngOnInit() {
+    this.client.getProductById(this.id).subscribe({
+      next: (product) => {
+        this.product.set(product);
+      },
+      error: () => {
+        alert('Producto no encontrado. Redirigiendo...');
+        this.router.navigateByUrl('/productos');
+      },
+    });
+  }
 
   onEditedProduct(product: Product) {
     this.isEditing.set(false);

@@ -1,0 +1,22 @@
+article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  gap: 2rem;
+
+  p.description {
+    width: min(100% - 1rem, 50ch);
+  }
+}
+
+.actions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+
+  button {
+    width: min(50% - 2rem, 8rem);
+  }
+}
