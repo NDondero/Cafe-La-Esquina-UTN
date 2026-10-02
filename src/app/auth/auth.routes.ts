@@ -1,13 +1,14 @@
 import { Routes } from '@angular/router';
+import { ROUTE_SEGMENTS } from '../app.route.segments';
 
 const authRoutes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'login',
+    redirectTo: ROUTE_SEGMENTS.login,
   },
   {
-    path: 'login',
+    path: ROUTE_SEGMENTS.login,
     loadComponent: () => import('./features/login/login'),
   },
 ];

@@ -4,6 +4,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { ProductCard } from '../../ui/product-card/product-card';
 import { Router } from '@angular/router';
 import { Product } from '../../data-access/product';
+import { ROUTE_COMMANDS } from '../../../app.route.segments';
 
 @Component({
   imports: [ProductCard],
@@ -69,7 +70,7 @@ export default class ProductList {
   }
 
   navigateToDetails(id: string | number) {
-    this.router.navigate(['productos', id]);
+    this.router.navigate(ROUTE_COMMANDS.productDetails(id));
   }
 
   private toSortedByCategoryAndName(products: Product[]) {

@@ -1,16 +1,16 @@
 <h2>La Esquina</h2>
 <nav>
   <a
-    routerLink="/productos"
+    [routerLink]="commands.products"
     routerLinkActive="active-link"
     [routerLinkActiveOptions]="{ exact: true }"
   >
     Productos
   </a>
-  <a routerLink="/productos/agregar" routerLinkActive="active-link">Agregar productos</a>
+  <a [routerLink]="commands.addProduct" routerLinkActive="active-link">Agregar productos</a>
 </nav>
 @if (auth.isAuthenticated()) {
   <button (click)="logout()">Cerrar Sesión</button>
 } @else {
-  <button routerLink="/auth/login">Iniciar sesión</button>
+  <button [routerLink]="commands.login">Iniciar sesión</button>
 }

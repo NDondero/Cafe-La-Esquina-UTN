@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductClient } from '../../data-access/product-client';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Product } from '../../data-access/product';
+import { ROUTE_COMMANDS } from '../../../app.route.segments';
 
 @Component({
   imports: [ProductForm],
@@ -30,7 +31,7 @@ export default class ProductDetails implements OnInit {
       },
       error: () => {
         alert('Producto no encontrado. Redirigiendo...');
-        this.router.navigateByUrl('/productos');
+        this.router.navigate(ROUTE_COMMANDS.products);
       },
     });
   }
@@ -44,7 +45,7 @@ export default class ProductDetails implements OnInit {
     const { id } = this.product()!;
     this.client.deleteProduct(id).subscribe(() => {
       alert('Producto eliminado con éxito, redirigiendo...');
-      this.router.navigateByUrl('productos');
+      this.router.navigate(ROUTE_COMMANDS.products);
     });
   }
 }

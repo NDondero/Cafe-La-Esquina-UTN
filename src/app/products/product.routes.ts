@@ -4,6 +4,7 @@ import ProductForm from './features/product-form/product-form';
 import ProductDetails from './features/product-details/product-details';
 import { authGuard } from '../auth/data-access/auth-guard';
 import { unsavedFormGuard } from './data-access/unsaved-form-guard';
+import { ROUTE_SEGMENTS } from '../app.route.segments';
 
 const productRoutes: Routes = [
   {
@@ -11,13 +12,13 @@ const productRoutes: Routes = [
     component: ProductList,
   },
   {
-    path: 'agregar',
+    path: ROUTE_SEGMENTS.addProduct,
     component: ProductForm,
     canActivate: [authGuard],
     canDeactivate: [unsavedFormGuard]
   },
   {
-    path: ':id',
+    path: ROUTE_SEGMENTS.productDetails,
     component: ProductDetails,
   },
 ];

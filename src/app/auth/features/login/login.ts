@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../data-access/auth.service';
 import { Router } from '@angular/router';
+import { ROUTE_COMMANDS } from '../../../app.route.segments';
 
 @Component({
   imports: [ReactiveFormsModule],
@@ -33,6 +34,6 @@ export default class Login {
     }
     const credentials = this.loginForm.getRawValue();
     await this.auth.login(credentials);
-    this.router.navigateByUrl('/productos');
+    this.router.navigate(ROUTE_COMMANDS.products);
   }
 }
