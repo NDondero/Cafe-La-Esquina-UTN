@@ -26,4 +26,6 @@ article {
   -webkit-line-clamp: 2;
   line-clamp: 2;
   overflow: hidden;
+  line-height: 1.4;
+  min-block-size: 2lh;
 }
