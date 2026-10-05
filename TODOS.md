@@ -2,17 +2,6 @@
 
 ## Por hacer
 
-- Refactorizar formularios para usar SignalForms
-  - definir modelo de datos `signal<ProductFormModel>({ ... })`
-  - inicializar el formulario con `form()`
-    - primer parámetro `WritableSignal`
-    - segundo parámetro función de validación de schema
-    - tercer parámetro objeto de configuracion con clave `submission` que a su vez es un objeto con las claves `action` y opcionalmente `onInvalid`, ambas funciones que se ejecutan en cada caso
-  - modificar lo que haga falta para compatibilizar el cambio de tipo de dato del formulario
-  - cambiar las directivas y escucha de eventos del elemento `<form>` a `[formRoot]`
-  - cambiar las directivas `formControlName` por `[formField]`
-  - aprovechar la señal `submitting()` para el texto del botón 
-  - cambiar los patrones de errores a otros más adecuados para el enfoque de SignalForms
 - Refactorizar ventanas de confirmación/alerta por modales
   - crear componente DialogModal
     - difnir output básico `readonly closed = output()`
@@ -189,3 +178,14 @@
   ```
 - Dar estilo a la vista de detalles
 - Refactorizar rutas para centralizar las cadenas literales
+- Refactorizar formularios para usar SignalForms
+  - definir modelo de datos `signal<ProductFormModel>({ ... })`
+  - inicializar el formulario con `form()`
+    - primer parámetro `WritableSignal`
+    - segundo parámetro función de validación de schema
+    - tercer parámetro objeto de configuracion con clave `submission` que a su vez es un objeto con las claves `action` y opcionalmente `onInvalid`, ambas funciones que se ejecutan en cada caso
+  - modificar lo que haga falta para compatibilizar el cambio de tipo de dato del formulario
+  - cambiar las directivas y escucha de eventos del elemento `<form>` a `[formRoot]`
+  - cambiar las directivas `formControlName` por `[formField]`
+  - aprovechar la señal `submitting()` para el texto del botón 
+  - cambiar los patrones de errores a otros más adecuados para el enfoque de SignalForms

@@ -1,67 +1,69 @@
 <h2>{{ isEditing() ? 'Editando Producto' : 'Agregando Producto' }}</h2>
 
-<form [formGroup]="productForm" autocomplete="off" (ngSubmit)="subtmitForm()">
+<form [formRoot]="productForm">
   <div class="form-control">
-    <label for="name" >Nombre</label>
-    <input type="text" id="name" formControlName="name" placeholder="Pan">
-    @if (name.touched) {
-      @if (name.hasError('required')) {
-        <span class="errors">Requerido</span>
-      } @else if(name.hasError('minlength')) {
-        <span class="errors">Nombre muy corto</span>
+    <label for="name">Nombre</label>
+    <input type="text" id="name" placeholder="Pan" [formField]="productForm.name" />
+    <!-- @let name = productForm.name; -->
+    @if (productForm.name().touched()) {
+      @for (error of productForm.name().errors(); track error) {
+        <span class="errors">{{ error.message }}</span>
       }
     }
   </div>
   <div class="form-control">
     <label for="price">Precio</label>
-    <input type="number" id="price" formControlName="price" min="1000" placeholder="1500">
-    @if (productForm.controls.price.dirty) {
-      @if (productForm.controls.price.hasError('required')) {
-        <span class="errors">Requerido</span>
-      }
-      @else if(productForm.controls.price.hasError('min')) {
-        <span class="errors">El precio mínimo es $1000</span>
+    <input type="number" id="price" placeholder="1500" [formField]="productForm.price" />
+    @if (productForm.price().dirty() || productForm.price().touched()) {
+      @for (error of productForm.price().errors(); track error) {
+        <span class="errors">{{ error.message }}</span>
       }
     }
   </div>
 
   <div class="form-control">
     <label for="category">Categoría</label>
-    <select id="category" formControlName="category">
+    <select id="category" [formField]="productForm.category">
       <option value="" selected disabled>seleccione una categoría</option>
       @for (category of categories; track $index) {
         <option [value]="category">{{ category }}</option>
       }
     </select>
-    @if (category.touched) {
-      @if (category.hasError('required')) {
-        <span class="errors">Requerido</span>
-      }
+    @if (productForm.category().touched() && productForm.category().invalid()) {
+      <span class="errors">{{ productForm.category().errors()[0].message }}</span>
     }
   </div>
 
   <div class="form-control">
     <label for="description">Descripción</label>
-    <textarea id="description" formControlName="description" rows="4" placeholder="Pan de masa madre"></textarea>
-    @if (description.touched) {
-      @if (description.hasError('required')) {
-        <span class="errors">Requerido</span>
-      }
+    <textarea
+      id="description"
+      [formField]="productForm.description"
+      rows="4"
+      placeholder="Pan de masa madre"
+    ></textarea>
+    @if (productForm.description().touched() && productForm.description().invalid()) {
+      <span class="errors">{{ productForm.description().errors()[0].message }}</span>
     }
   </div>
 
   <div class="form-control checkbox">
     <label for="isFeatured">Producto destacado</label>
-    <input type="checkbox" id="isFeatured" formControlName="isFeatured">
+    <input type="checkbox" id="isFeatured" [formField]="productForm.isFeatured" />
   </div>
   <div class="form-control checkbox">
     <label for="isOnSale">Producto en oferta</label>
-    <input type="checkbox" id="isOnSale" formControlName="isOnSale">
+    <input type="checkbox" id="isOnSale" [formField]="productForm.isOnSale" />
   </div>
-  
 
   <div class="actions">
-    <button type="submit" [disabled]="productForm.invalid">Enviar</button>
-    <button type="reset">Borrar</button>
+    <button type="submit" [disabled]="productForm().invalid()">
+      @if (productForm().submitting()) {
+        Enviando...
+      } @else {
+        Enviar
+      }
+    </button>
+    <button type="reset" (click)="resetForm()">Borrar</button>
   </div>
 </form>
