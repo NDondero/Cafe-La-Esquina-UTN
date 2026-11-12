@@ -4,6 +4,7 @@ import { Product, ProductFormModel } from '../../data-access/product';
 import { form, min, minLength, required, FormRoot, FormField } from '@angular/forms/signals';
 import { ConfirmationService } from '../../../shared/confirmation.service';
 import { ConfirmDialog } from '../../../shared/confirm-dialog/confirm-dialog';
+import { NotificationService } from '../../../shared/notification.service';
 
 @Component({
   imports: [FormRoot, FormField, ConfirmDialog],
@@ -15,6 +16,7 @@ export default class ProductForm implements OnInit {
   private readonly client = inject(ProductClient);
 
   protected readonly confirmationService = inject(ConfirmationService);
+  private readonly notificationService = inject(NotificationService);
 
   public readonly editingProduct = input<Product>();
   protected readonly isEditing = computed(() => this.editingProduct() !== undefined);
@@ -62,12 +64,12 @@ export default class ProductForm implements OnInit {
           if (this.isEditing() && editingProduct) {
             const { id } = editingProduct;
             this.client.editProduct(product, id).subscribe((product) => {
-              alert('Producto modificado con éxito!');
+              this.notificationService.show('Producto modificado con éxito!');
               this.editted.emit(product);
             });
           } else {
             this.client.addProduct(product).subscribe(() => {
-              alert('Se Agrego el producto con éxito!');
+              this.notificationService.show('Se Agrego el producto con éxito!');
               this.resetForm();
             });
           }

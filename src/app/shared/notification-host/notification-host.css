@@ -1,0 +1,27 @@
+:host {
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1rem;
+}
+
+.notification {
+  position: fixed;
+  inset: 80% 1rem auto auto;
+
+  inline-size: fit-content;
+  min-inline-size: min(16rem, calc(100vw - 2rem));
+  max-block-size: calc(100vh - 2rem);
+
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 1.5rem;
+
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  box-shadow: 0 0 1rem 1rem #0002;
+}

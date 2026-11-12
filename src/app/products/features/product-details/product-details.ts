@@ -7,6 +7,7 @@ import { ROUTE_COMMANDS } from '../../../app.route.segments';
 import { DialogModal } from '../../../shared/dialog-modal/dialog-modal';
 import { ConfirmationService } from '../../../shared/confirmation.service';
 import { ConfirmDialog } from '../../../shared/confirm-dialog/confirm-dialog';
+import { NotificationService } from '../../../shared/notification.service';
 
 @Component({
   imports: [ProductForm, DialogModal, ConfirmDialog],
@@ -20,6 +21,7 @@ export default class ProductDetails implements OnInit {
   private readonly client = inject(ProductClient);
 
   protected readonly confirmationService = inject(ConfirmationService);
+  private readonly notificationService = inject(NotificationService);
 
   private readonly id = this.route.snapshot.paramMap.get('id')!;
 
@@ -32,8 +34,10 @@ export default class ProductDetails implements OnInit {
         this.product.set(product);
       },
       error: () => {
-        alert('Producto no encontrado. Redirigiendo...');
-        this.router.navigate(ROUTE_COMMANDS.products);
+        this.notificationService.show('Producto no encontrado. Redirigiendo...');
+        setTimeout(() => {
+          this.router.navigate(ROUTE_COMMANDS.products);
+        }, 500);
       },
     });
   }
@@ -49,8 +53,10 @@ export default class ProductDetails implements OnInit {
     }
     const { id } = this.product()!;
     this.client.deleteProduct(id).subscribe(() => {
-      alert('Producto eliminado con éxito, redirigiendo...');
-      this.router.navigate(ROUTE_COMMANDS.products);
+      this.notificationService.show('Producto eliminado con éxito, redirigiendo...');
+      setTimeout(() => {
+        this.router.navigate(ROUTE_COMMANDS.products);
+      }, 500);
     });
   }
 }

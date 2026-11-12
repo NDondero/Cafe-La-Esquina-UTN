@@ -7,6 +7,7 @@ import { Product } from '../../data-access/product';
 import { ROUTE_COMMANDS } from '../../../app.route.segments';
 import { ConfirmationService } from '../../../shared/confirmation.service';
 import { ConfirmDialog } from '../../../shared/confirm-dialog/confirm-dialog';
+import { NotificationService } from '../../../shared/notification.service';
 
 @Component({
   imports: [ProductCard, ConfirmDialog],
@@ -19,6 +20,7 @@ export default class ProductList {
   private readonly router = inject(Router);
 
   protected readonly confirmationService = inject(ConfirmationService);
+  private readonly notificationService = inject(NotificationService);
 
   private readonly productsSource = toSignal(this.client.getAllProducts());
   protected readonly products = linkedSignal(() => {
@@ -69,10 +71,10 @@ export default class ProductList {
       return;
     }
     this.client.deleteProduct(id).subscribe((v) => {
-      console.log(v); // TODO notification
       this.products.update((previousValue) => {
         return previousValue.filter((product) => product.id !== id);
       });
+      this.notificationService.show('Producto, eliminado con éxito');
     });
   }
 
