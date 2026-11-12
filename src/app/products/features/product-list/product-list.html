@@ -64,3 +64,10 @@
     </ul>
   }
 </section>
+
+@if (confirmationService.confirmationRequest(); as message) {
+  <app-confirm-dialog
+    [message]="message"
+    (closed)="confirmationService.onConfirmationClosed($event)"
+  ></app-confirm-dialog>
+}

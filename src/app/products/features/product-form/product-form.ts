@@ -2,15 +2,19 @@ import { Component, computed, inject, input, OnInit, output, signal } from '@ang
 import { ProductClient } from '../../data-access/product-client';
 import { Product, ProductFormModel } from '../../data-access/product';
 import { form, min, minLength, required, FormRoot, FormField } from '@angular/forms/signals';
+import { ConfirmationService } from '../../../shared/confirmation.service';
+import { ConfirmDialog } from '../../../shared/confirm-dialog/confirm-dialog';
 
 @Component({
-  imports: [FormRoot, FormField],
+  imports: [FormRoot, FormField, ConfirmDialog],
   selector: 'app-product-form',
   styleUrl: './product-form.css',
   templateUrl: './product-form.html',
 })
 export default class ProductForm implements OnInit {
   private readonly client = inject(ProductClient);
+
+  protected readonly confirmationService = inject(ConfirmationService);
 
   public readonly editingProduct = input<Product>();
   protected readonly isEditing = computed(() => this.editingProduct() !== undefined);
@@ -49,9 +53,11 @@ export default class ProductForm implements OnInit {
     {
       submission: {
         action: async (field) => {
+          if (!(await this.confirmationService.requestConfirmation('Desea confirmar los datos?'))) {
+            return;
+          }
           await new Promise((resolve) => setTimeout(resolve, 500)); // simulamos latencia
           const product = field().value();
-          if (!confirm('Desea confirmar los datos?')) return;
           const editingProduct = this.editingProduct();
           if (this.isEditing() && editingProduct) {
             const { id } = editingProduct;

@@ -19,6 +19,7 @@
       <button (click)="onProductDeleted()" [disabled]="isEditing()">Borrar</button>
     </div>
   </article>
+
   @if (isEditing()) {
     <app-dialog-modal (closed)="isEditing.set(false)">
       <app-product-form
@@ -26,5 +27,12 @@
         (editted)="onEditedProduct($event)"
       ></app-product-form>
     </app-dialog-modal>
+  }
+
+  @if (confirmationService.confirmationRequest(); as message) {
+    <app-confirm-dialog
+      [message]="message"
+      (closed)="confirmationService.onConfirmationClosed($event)"
+    ></app-confirm-dialog>
   }
 }

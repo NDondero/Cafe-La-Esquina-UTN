@@ -5,9 +5,11 @@ import { ProductClient } from '../../data-access/product-client';
 import { Product } from '../../data-access/product';
 import { ROUTE_COMMANDS } from '../../../app.route.segments';
 import { DialogModal } from '../../../shared/dialog-modal/dialog-modal';
+import { ConfirmationService } from '../../../shared/confirmation.service';
+import { ConfirmDialog } from '../../../shared/confirm-dialog/confirm-dialog';
 
 @Component({
-  imports: [ProductForm, DialogModal],
+  imports: [ProductForm, DialogModal, ConfirmDialog],
   selector: 'app-product-details',
   styleUrl: './product-details.css',
   templateUrl: './product-details.html',
@@ -17,8 +19,10 @@ export default class ProductDetails implements OnInit {
   private readonly router = inject(Router);
   private readonly client = inject(ProductClient);
 
+  protected readonly confirmationService = inject(ConfirmationService);
+
   private readonly id = this.route.snapshot.paramMap.get('id')!;
-  
+
   protected readonly product = signal<Product | undefined>(undefined);
   protected readonly isEditing = signal(false);
 
@@ -39,7 +43,10 @@ export default class ProductDetails implements OnInit {
     this.product.set(product);
   }
 
-  onProductDeleted() {
+  async onProductDeleted() {
+    if (!(await this.confirmationService.requestConfirmation('Desea borrar este producto?'))) {
+      return;
+    }
     const { id } = this.product()!;
     this.client.deleteProduct(id).subscribe(() => {
       alert('Producto eliminado con éxito, redirigiendo...');

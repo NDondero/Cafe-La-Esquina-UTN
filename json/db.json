@@ -44,15 +44,6 @@
       "isFeatured": true,
       "isOnSale": true,
       "id": "GBzEkmT9eWY"
-    },
-    {
-      "name": "Pan",
-      "category": "Panadería",
-      "price": 1000,
-      "description": "pancito",
-      "isFeatured": false,
-      "isOnSale": false,
-      "id": "tFMc-P5NMUY"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -67,3 +67,10 @@
     <button type="reset" (click)="resetForm()">Borrar</button>
   </div>
 </form>
+
+@if (confirmationService.confirmationRequest(); as message) {
+  <app-confirm-dialog
+    [message]="message"
+    (closed)="confirmationService.onConfirmationClosed($event)"
+  ></app-confirm-dialog>
+}

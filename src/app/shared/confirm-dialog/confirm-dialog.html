@@ -1,0 +1,7 @@
+<dialog #dialogRef (cancel)="closed.emit(false)" (click)="onBackdropClick($event)">
+  <p>{{ message() }}</p>
+  <div class="actions">
+    <button (click)="closed.emit(false)">cancelar</button>
+    <button (click)="closed.emit(true)">confirmar</button>
+  </div>
+</dialog>

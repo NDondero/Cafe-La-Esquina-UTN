@@ -5,9 +5,11 @@ import { ProductCard } from '../../ui/product-card/product-card';
 import { Router } from '@angular/router';
 import { Product } from '../../data-access/product';
 import { ROUTE_COMMANDS } from '../../../app.route.segments';
+import { ConfirmationService } from '../../../shared/confirmation.service';
+import { ConfirmDialog } from '../../../shared/confirm-dialog/confirm-dialog';
 
 @Component({
-  imports: [ProductCard],
+  imports: [ProductCard, ConfirmDialog],
   selector: 'app-product-list',
   styleUrl: './product-list.css',
   templateUrl: './product-list.html',
@@ -15,6 +17,8 @@ import { ROUTE_COMMANDS } from '../../../app.route.segments';
 export default class ProductList {
   private readonly client = inject(ProductClient);
   private readonly router = inject(Router);
+
+  protected readonly confirmationService = inject(ConfirmationService);
 
   private readonly productsSource = toSignal(this.client.getAllProducts());
   protected readonly products = linkedSignal(() => {
@@ -60,9 +64,12 @@ export default class ProductList {
     this.filterByCategory.set('');
   }
 
-  deleteProduct(id: string | number) {
+  async deleteProduct(id: string | number) {
+    if (!(await this.confirmationService.requestConfirmation('Desea borrar este producto?'))) {
+      return;
+    }
     this.client.deleteProduct(id).subscribe((v) => {
-      console.log(v);
+      console.log(v); // TODO notification
       this.products.update((previousValue) => {
         return previousValue.filter((product) => product.id !== id);
       });
