@@ -13,14 +13,18 @@
       <p>Producto en oferta!!</p>
     }
     <div class="actions">
-      <button (click)="isEditing.update((v) => !v)">{{ isEditing() ? 'Cancelar' : 'Editar' }}</button>
+      <button (click)="isEditing.update((v) => !v)">
+        {{ isEditing() ? 'Cancelar' : 'Editar' }}
+      </button>
       <button (click)="onProductDeleted()" [disabled]="isEditing()">Borrar</button>
     </div>
   </article>
   @if (isEditing()) {
-    <app-product-form
-      [editingProduct]="product"
-      (editted)="onEditedProduct($event)"
-    ></app-product-form>
+    <app-dialog-modal (closed)="isEditing.set(false)">
+      <app-product-form
+        [editingProduct]="product"
+        (editted)="onEditedProduct($event)"
+      ></app-product-form>
+    </app-dialog-modal>
   }
 }

@@ -1,0 +1,23 @@
+dialog {
+  position: fixed;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+
+  inline-size: fit-content;
+  min-inline-size: min(42rem, calc(100vw - 2rem));
+  max-block-size: calc(100vh - 2rem);
+
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+
+  & > button {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    min-inline-size: 44px;
+    min-block-size: 44px;
+  }
+}

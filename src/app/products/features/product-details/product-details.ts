@@ -1,13 +1,13 @@
-import { Component, inject, linkedSignal, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import ProductForm from '../product-form/product-form';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductClient } from '../../data-access/product-client';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { Product } from '../../data-access/product';
 import { ROUTE_COMMANDS } from '../../../app.route.segments';
+import { DialogModal } from '../../../shared/dialog-modal/dialog-modal';
 
 @Component({
-  imports: [ProductForm],
+  imports: [ProductForm, DialogModal],
   selector: 'app-product-details',
   styleUrl: './product-details.css',
   templateUrl: './product-details.html',
@@ -18,9 +18,7 @@ export default class ProductDetails implements OnInit {
   private readonly client = inject(ProductClient);
 
   private readonly id = this.route.snapshot.paramMap.get('id')!;
-
-  // protected readonly productSource = toSignal(this.client.getProductById(this.id));
-  // protected readonly product = linkedSignal(() => this.productSource());
+  
   protected readonly product = signal<Product | undefined>(undefined);
   protected readonly isEditing = signal(false);
 

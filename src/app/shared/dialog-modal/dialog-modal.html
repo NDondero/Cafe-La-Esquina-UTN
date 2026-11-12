@@ -1,0 +1,4 @@
+<dialog #dialogRef (cancel)="closed.emit()">
+  <button type="button" (click)="closed.emit()">x</button>
+  <ng-content></ng-content>
+</dialog>
